@@ -1,6 +1,7 @@
 {
   "name": "sharent",
   "version": "0.1.0",
+  "homepage": "https://satoshikawabata.github.io/sharent/",
   "private": true,
   "dependencies": {
     "react": "^15.5.4",

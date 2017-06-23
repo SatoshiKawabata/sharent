@@ -1,7 +1,3 @@
 .file__container {
   cursor: pointer;
-  transition: transform 0.3s;
-}
-.file__container:hover {
-  transform: scale(.95);
 }

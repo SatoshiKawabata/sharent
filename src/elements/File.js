@@ -27,8 +27,6 @@ class File extends Component {
       thumbnailUrl: null,
       type: null,
     };
-    this._onMouseOverThumbnail = this._onMouseOverThumbnail.bind(this);
-    this._onMouseOutThumbnail = this._onMouseOutThumbnail.bind(this);
   }
 
   componentDidMount() {
@@ -87,9 +85,6 @@ class File extends Component {
     if (this.state.thumbnailUrl) {
       return <img
         src={this.state.thumbnailUrl}
-        onMouseOver={this._onMouseOverThumbnail}
-        onMouseOut={this._onMouseOutThumbnail}
-        style={this.state.hoverStyle}
         className='file__thumbnail' />;
     } else {
       return <PermMediaIcon viewBox='50 50 100 100' />;
@@ -98,18 +93,6 @@ class File extends Component {
 
   _isFolder(file) {
     return file['.tag'] === FILE_TYPE.FOLDER;
-  }
-
-  _onMouseOverThumbnail(e:Event) {
-    this.setState({
-      hoverStyle: { transform: `${e.currentTarget.style.transform} scale(0.9)` },
-    });
-  }
-
-  _onMouseOutThumbnail(e:Event) {
-    this.setState({
-      hoverStyle: null,
-    });
   }
 
   _onClickFile(e) {

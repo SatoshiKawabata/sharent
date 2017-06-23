@@ -82,7 +82,7 @@ class File extends Component {
 
   _renderThumbnail() {
     if (this.state.thumbnailUrl) {
-      return <img className='file__thumbnail' src={this.state.thumbnailUrl} />;
+      return <img src={this.state.thumbnailUrl} />;
     } else {
       return <PermMediaIcon viewBox='50 50 100 100' />;
     }

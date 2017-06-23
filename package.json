@@ -4,18 +4,25 @@
   "homepage": "https://satoshikawabata.github.io/sharent/",
   "private": true,
   "dependencies": {
+    "dropbox": "^2.5.3",
+    "material-ui": "^0.18.1",
     "react": "^15.5.4",
-    "react-dom": "^15.5.4"
+    "react-dom": "^15.5.4",
+    "react-redux": "^5.0.4",
+    "react-tap-event-plugin": "^2.0.1",
+    "redux": "^3.6.0",
+    "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
-    "gh-pages": "^0.12.0",
+    "eslint": "^3.19.0",
+    "flow-bin": "^0.46.0",
     "react-scripts": "0.9.5"
   },
   "scripts": {
-    "deploy": "npm run build && gh-pages -d build",
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build ; rm -rd ./docs ; cp -rf ./build/ ./docs",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "flow": "flow"
   }
 }

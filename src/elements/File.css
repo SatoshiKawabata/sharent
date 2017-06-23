@@ -1,0 +1,11 @@
+.file__container {
+  cursor: pointer;
+}
+
+.file__thumbnail {
+  transition: transform 0.3s;
+}
+
+.file__thumbnail:hover {
+  transform: translateX(-50%) scale(.8) !important;
+}

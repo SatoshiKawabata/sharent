@@ -4,8 +4,9 @@
 
 .file__thumbnail {
   transition: transform 0.3s;
+  transform-origin: center;
 }
 
 .file__thumbnail:hover {
-  transform: translateX(-50%) scale(.8) !important;
+  transform: translateX(-50%) scale(.9) !important;
 }

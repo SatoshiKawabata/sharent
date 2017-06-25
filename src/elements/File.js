@@ -5,7 +5,9 @@ import ActionCreator from '../ActionCreator';
 import { FILE_TYPE } from '../consts';
 import { GridTile } from 'material-ui/GridList';
 import PermMediaIcon from 'material-ui/svg-icons/action/perm-media';
+import RotateRightIcon from 'material-ui/svg-icons/image/rotate-right';
 import './File.css';
+import DateUtil from '../utils/DateUtil';
 
 /**
  * Fileを表示する
@@ -71,7 +73,7 @@ class File extends Component {
         className='file__container'>
         <GridTile
           title={<a>{file.name}</a>}
-          subtitle={file.server_modified}
+          subtitle={file.client_modified ? DateUtil.getDate(file.client_modified) : ''}
           key={file.path_display}
           titlePosition='bottom'
           style={{ height: 300 }}>
@@ -82,12 +84,12 @@ class File extends Component {
   }
 
   _renderThumbnail() {
-    if (this.state.thumbnailUrl) {
+    if (this.state.type === FILE_TYPE.FILE) {
       return <img
         src={this.state.thumbnailUrl}
         className='file__thumbnail' />;
     } else {
-      return <PermMediaIcon viewBox='50 50 100 100' />;
+      return <PermMediaIcon style={{ transformOrigin: 'top', transform: 'scale(5)' }} />;
     }
   }
 
@@ -98,8 +100,8 @@ class File extends Component {
   _onClickFile(e) {
     const { path_display: path, rev } = this.props.file;
     const { type } = this.state;
+    this.props.startLoading();
     if (type === FILE_TYPE.FILE) {
-      this.props.startLoading();
       this.props.filesDownload(path, rev);
     } else {
       this.props.filesListFolder(path);

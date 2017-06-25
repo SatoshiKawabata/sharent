@@ -7,6 +7,8 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import lang from '../lang/lang';
 import './Content.css';
+import DateUtil from '../utils/DateUtil';
+import ContentImage from './ContentImage';
 
 /**
  * コンテンツを表示する
@@ -36,6 +38,15 @@ class Content extends Component {
       } else {
         type = CONTENT_TYPE.IMAGE;
       }
+
+      const img = new Image();
+      img.onload = e => {
+        console.log('img', e);
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+      };
+      img.src = blobUrl;
+
       this.setState({
         src: blobUrl,
         type,
@@ -64,7 +75,7 @@ class Content extends Component {
   }
 
   render() {
-    const { name, server_modified: modifieddate } = this.props.content || {};
+    const { name, client_modified: modifieddate } = this.props.content || {};
     const { isDialogOpen } = this.state;
     return (
       <Dialog
@@ -73,11 +84,13 @@ class Content extends Component {
           actions={this._renderDialogActions()}
           autoScrollBodyContent={true}
           open={isDialogOpen}
-          contentStyle={{ width: '90vw', maxWidth: 'none', height: '90vh' }}
+          contentStyle={{ width: '100vw', maxWidth: 'none', height: '95vh', maxHeight: 'none' }}
           repositionOnUpdate={true}
+          autoDetectWindowHeight={false}
+          titleStyle={{ fontSize: '12px', lineHeight: '12px', padding: '20px 20px 16px' }}
         >
         <div>
-          <p>{lang.get('addDate')} {modifieddate}</p>
+          <p className='content__date'>{lang.get('addDate')} {DateUtil.getDate(modifieddate)}</p>
           { this._renderContent() }
         </div>
       </Dialog>
@@ -89,7 +102,7 @@ class Content extends Component {
     if (type === CONTENT_TYPE.VIDEO) {
       return <video className='content__body' src={src} controls={true} autoPlay={true} />;
     } else {
-      return <img className='content__body' src={src} />;
+      return <ContentImage src={src} />;
     }
   }
 

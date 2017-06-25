@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Files from '../elements/Files';
 import Content from '../elements/Content';
 import Loading from '../elements/Loading';
+import Header from '../elements/Header';
 
 class Container extends Component {
 
@@ -13,6 +14,7 @@ class Container extends Component {
   render() {
     return (
     <div>
+      <Header />
       <Files />
       <Content />
       <Loading />

@@ -13,8 +13,9 @@ export const ACTIONS = {
   SET_EMAIL_PASSWORD: 'setEmailPassword',
   DELETE_CONTENT: 'deleteContent',
   SAVE_LANG: 'saveLang',
-  START_LOADING: 'start_LOADING',
-  STOP_LOADING: 'stop_LOADING',
+  START_LOADING: 'start_loading',
+  STOP_LOADING: 'stop_loading',
+  HISTORY_BACK: 'history_back',
 };
 
 /**
@@ -46,6 +47,7 @@ class ActionCreator {
           dispath({
             type: ACTIONS.ON_FILES_LIST_FOLDER,
             res,
+            path,
           });
         })
         .catch(err => {
@@ -103,8 +105,8 @@ class ActionCreator {
     return dispath => {
       this._dbx.getAuthenticationUrl()
         .then(res => {
-          console.log('あああああ', res);
-        })
+          console.log('test', res);
+        });
     }
   }
 
@@ -123,6 +125,29 @@ class ActionCreator {
       type: ACTIONS.SAVE_LANG,
       lang,
     };
+  }
+
+  historyBack(pathHistory:string[]) {
+    if (pathHistory.length > 1) {
+
+      pathHistory.pop();
+      const path = pathHistory[pathHistory.length - 1];
+
+      return dispath => {
+        this._dbx.filesListFolder({ path })
+          .then(res => {
+            dispath({
+              type: ACTIONS.HISTORY_BACK,
+              res,
+              pathHistory,
+            });
+          })
+          .catch(err => {
+            // error
+            console.log('error', err);
+          });
+      };
+    }
   }
 }
 

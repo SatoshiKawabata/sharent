@@ -14,11 +14,13 @@ class Files extends Component {
   static propTypes = {
     files: PropTypes.array,
     filesListFolder: PropTypes.func,
+    startLoading: PropTypes.func,
   };
 
   componentDidMount() {
     console.log('files', this.props.files);
     if (!this.props.files) {
+      this.props.startLoading();
       this.props.filesListFolder();
     }
   }
@@ -60,6 +62,9 @@ class Files extends Component {
     return {
       filesListFolder: () => {
         dispatch(ActionCreator.filesListFolder());
+      },
+      startLoading: () => {
+        dispatch(ActionCreator.startLoading());
       },
     };
   }

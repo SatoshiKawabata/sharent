@@ -24,6 +24,7 @@ class Content extends Component {
     this.state = {
       type: null,
       src: null,
+      name: null,
       isDialogOpen: false,
     };
   }
@@ -39,17 +40,19 @@ class Content extends Component {
         type = CONTENT_TYPE.IMAGE;
       }
 
-      const img = new Image();
-      img.onload = e => {
-        console.log('img', e);
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
-      };
-      img.src = blobUrl;
+      // const img = new Image();
+      // img.onload = e => {
+      //   console.log('img', e);
+      //   const canvas = document.createElement('canvas');
+      //   const ctx = canvas.getContext('2d');
+      // };
+      // img.src = blobUrl;
+      const { name } = content;
 
       this.setState({
         src: blobUrl,
         type,
+        name,
       });
     }
     this.setState({
@@ -98,11 +101,11 @@ class Content extends Component {
   }
 
   _renderContent() {
-    const { src, type } = this.state;
+    const { src, type, name } = this.state;
     if (type === CONTENT_TYPE.VIDEO) {
       return <video className='content__body' src={src} controls={true} autoPlay={true} />;
     } else {
-      return <ContentImage src={src} />;
+      return <ContentImage src={src} name={name}/>;
     }
   }
 

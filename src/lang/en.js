@@ -3,4 +3,5 @@ export default {
   addDate: 'add date',
   loading: 'loading',
   rotate: 'rotate image',
+  download: 'download image',
 };

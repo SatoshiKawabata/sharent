@@ -4,11 +4,13 @@ import FlatButton from 'material-ui/FlatButton';
 import lang from '../lang/lang';
 import ImageUtil from '../utils/ImageUtil';
 import RotateRightIcon from 'material-ui/svg-icons/image/rotate-right';
+import DownloadIcon from 'material-ui/svg-icons/action/get-app';
 import './ContentImage.css';
 
 class ContentImage extends Component {
   static propTypes = {
     src: PropTypes.string,
+    name: PropTypes.string,
   };
 
   constructor() {
@@ -49,13 +51,27 @@ class ContentImage extends Component {
           className={`content-image__image content-image__image--${isLandscape ? 'landscape' : 'portrait'}`}
           src={src}
           onLoad={this._onLoadImage} />
-        {this.props.src ? <FlatButton
-          onClick={this._onClickRotate}
-          label={lang.get('rotate')}
-          icon={<RotateRightIcon />}
-        /> : null}
+        {this.props.src ? this._renderBtns() : null}
       </div>
     );
+  }
+
+  _renderBtns() {
+    const { name = '' } = this.props;
+    const src = this.state.rotatedImageUrls[this.state.rotateCount];
+    return <div>
+      <a href={src} download={name}>
+        <FlatButton
+          label={lang.get('download')}
+          icon={<DownloadIcon />}
+        />
+      </a>
+      <FlatButton
+        onClick={this._onClickRotate}
+        label={lang.get('rotate')}
+        icon={<RotateRightIcon />}
+      />
+    </div>;
   }
 
   _onLoadImage(e:Event) {
@@ -67,7 +83,6 @@ class ContentImage extends Component {
   }
 
   _onClickRotate() {
-    console.log('rotate');
     const { rotateCount, rotatedImageUrls } = this.state;
     const next = rotateCount < 3 ? rotateCount + 1 : 0;
     if (rotatedImageUrls[next]) {

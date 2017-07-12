@@ -24,7 +24,8 @@ class App extends Component {
   _query:Object;
 
   componentWillMount() {
-    this._query = qs.parse(window.location.search.slice(1));
+    const seed = window.location.search ? window.location.search.slice(1) : window.location.hash.slice(1);
+    this._query = qs.parse(seed);
     this._parseAuth();
     this._parseLang();
   }
@@ -59,9 +60,9 @@ class App extends Component {
     } = this._query;
     if (accessToken) {
       this.props.setAccessToken(accessToken);
-    } else if (email && password) {
-      // なければ、Emailとパスワードが有るか見る
-      this.props.setEmailPassword(email, password);
+    // } else if (email && password) {
+    //   // なければ、Emailとパスワードが有るか見る
+    //   this.props.setEmailPassword(email, password);
     } else {
       // なければ普通にOAuth認証画面へ
 

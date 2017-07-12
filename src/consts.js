@@ -7,5 +7,6 @@ export const FILE_TYPE = {
   FOLDER: 'folder',
 };
 export const DROP_BOX_INFO = {
-  CLIENT_ID: '4okf3x1cz7ohckr',
+  CLIENT_ID: '0tmn6wah7lbgyab',
+  REDIRECT_URI: 'localhost:3000',
 };

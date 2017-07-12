@@ -16,6 +16,7 @@ const initialState = {
   lang: 'ja',
   loading: false,
   pathHistory: [],
+  authUrl: null,
 };
 
 export default function Redusers(state = initialState, action) {
@@ -71,6 +72,10 @@ export default function Redusers(state = initialState, action) {
 
     case ACTIONS.STOP_LOADING:
       newState.loading = false;
+      return newState;
+
+    case ACTIONS.GET_AUTHENTICATION_URL:
+      newState.authUrl = action.url;
       return newState;
 
     default:

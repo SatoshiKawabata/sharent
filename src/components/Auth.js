@@ -6,13 +6,21 @@ import ActionCreator from '../ActionCreator';
 class Auth extends Component {
 
   static propTypes = {
+    getAuthenticationUrl: PropTypes.func.isRequired,
   };
 
   constructor() {
     super();
   }
+  componentWillReceiveProps(nextProps) {
+    const { authUrl } = nextProps;
+    if (authUrl) {
+      window.location.href = authUrl;
+    }
+  }
 
   componentWillMount() {
+    this.props.getAuthenticationUrl();
   }
 
   render() {
@@ -26,16 +34,21 @@ class Auth extends Component {
       accessToken,
       email,
       password,
+      authUrl,
     } = state;
     return {
       accessToken,
       email,
       password,
+      authUrl,
     };
   }
 
   static mapDispatchToProps(dispatch) {
     return {
+      getAuthenticationUrl: () => {
+        dispatch(ActionCreator.getAuthenticationUrl());
+      },
     };
   }
 }

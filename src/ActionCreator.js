@@ -22,10 +22,10 @@ export const ACTIONS = {
  * redux ActionCreator
  */
 class ActionCreator {
-  _dbx:Dropbox;
+  _dbx:Dropbox = new Dropbox({ clientId: DROP_BOX_INFO.CLIENT_ID });;
 
   setAccessToken(accessToken:string) {
-    this._dbx = new Dropbox({ accessToken, clientId: DROP_BOX_INFO.CLIENT_ID });
+    this._dbx.setAccessToken(accessToken);
     return {
       type: ACTIONS.SET_ACCESS_TOKEN,
       accessToken,
@@ -102,12 +102,11 @@ class ActionCreator {
   }
 
   getAuthenticationUrl() {
-    return dispath => {
-      this._dbx.getAuthenticationUrl()
-        .then(res => {
-          console.log('test', res);
-        });
-    }
+    const url = this._dbx.getAuthenticationUrl(window.location.href);
+    return {
+      type: ACTIONS.GET_AUTHENTICATION_URL,
+      url,
+    };
   }
 
   deleteContent() {

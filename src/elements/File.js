@@ -5,7 +5,6 @@ import ActionCreator from '../ActionCreator';
 import { FILE_TYPE } from '../consts';
 import { GridTile } from 'material-ui/GridList';
 import PermMediaIcon from 'material-ui/svg-icons/action/perm-media';
-import RotateRightIcon from 'material-ui/svg-icons/image/rotate-right';
 import './File.css';
 import DateUtil from '../utils/DateUtil';
 
@@ -76,7 +75,7 @@ class File extends Component {
           subtitle={file.client_modified ? DateUtil.getDate(file.client_modified) : ''}
           key={file.path_display}
           titlePosition='bottom'
-          style={{ height: 300 }}>
+          style={{ height: 200 }}>
           {this._renderThumbnail()}
         </GridTile>
       </div>

@@ -18,7 +18,6 @@ class Files extends Component {
   };
 
   componentDidMount() {
-    console.log('files', this.props.files);
     if (!this.props.files) {
       this.props.startLoading();
       this.props.filesListFolder();
@@ -29,7 +28,7 @@ class Files extends Component {
     return (
     <div className='files__root'>
       <GridList
-        cols={4}
+        cols={6}
         cellHeight='auto'
       >
       { this._renderFiles() }
